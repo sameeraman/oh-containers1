@@ -1,3 +1,7 @@
+# Challenge 3
+
+# Create AD group for AKS admins
+az ad group create --display-name ohAKSAdminGroup --mail-nickname ohAKSAdminGroup
 
 # Create the AKS cluster
 az aks create --resource-group oh-aks-rg --name oh-aks --enable-aad --aad-admin-group-object-ids 5304810c-d716-4ac5-9bfc-535bf1045ce6 --network-plugin azure --vnet-subnet-id "/subscriptions/a8a9109c-f242-4b40-9d53-72516dd43a02/resourceGroups/teamResources/providers/Microsoft.Network/virtualNetworks/vnet/subnets/aks-subnet" --docker-bridge-address 172.17.0.1/16 --dns-service-ip 10.3.0.10 --service-cidr 10.3.0.0/24 --generate-ssh-keys
@@ -5,3 +9,5 @@ az aks create --resource-group oh-aks-rg --name oh-aks --enable-aad --aad-admin-
 
 # Get Creds
 az aks get-credentials --resource-group oh-aks-rg --name oh-aks
+
+# Challenge 4
