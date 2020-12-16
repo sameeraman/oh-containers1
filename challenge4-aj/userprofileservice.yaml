@@ -14,3 +14,14 @@ spec:
   type: ClusterIP
 status:
   loadBalancer: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: userprofile-service
+  namespace: "ingress-basic"
+spec:
+  type: ExternalName
+  externalName: userprofile-service.api-dev
+  ports:
+    - port: 80
