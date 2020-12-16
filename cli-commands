@@ -11,3 +11,6 @@ az aks create --resource-group oh-aks-rg --name oh-aks --enable-aad --aad-admin-
 az aks get-credentials --resource-group oh-aks-rg --name oh-aks
 
 # Challenge 4
+
+# AKS integration
+az ad sp create-for-rbac --name ohServicePrincipal --skip-assignment
