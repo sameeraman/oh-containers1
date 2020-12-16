@@ -15,11 +15,7 @@ spec:
       - backend:
           serviceName: poi
           servicePort: 80
-        path: /hello-world-one(/|$)(.*)
-      - backend:
-          serviceName: aks-helloworld-two
-          servicePort: 80
-        path: /hello-world-two(/|$)(.*)
+        path: /poi(/|$)(.*)
       - backend:
           serviceName: poi
           servicePort: 80
