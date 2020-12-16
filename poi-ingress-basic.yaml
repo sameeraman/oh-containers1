@@ -1,0 +1,10 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: poi-service
+  namespace: ingress-basic
+spec:
+  type: ExternalName
+  externalName: poi-service.api-dev
+  ports:
+    - port: 80

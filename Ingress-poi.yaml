@@ -13,10 +13,10 @@ spec:
   - http:
       paths:
       - backend:
-          serviceName: poi
+          serviceName: poi-service
           servicePort: 80
         path: /poi(/|$)(.*)
       - backend:
-          serviceName: poi
+          serviceName: poi-service
           servicePort: 80
         path: /(.*)
