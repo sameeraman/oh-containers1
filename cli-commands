@@ -14,3 +14,9 @@ az aks get-credentials --resource-group oh-aks-rg --name oh-aks
 
 # AKS integration
 az ad sp create-for-rbac --name ohServicePrincipal --skip-assignment
+
+helm repo add csi-secrets-store-provider-azure https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts
+
+helm install csi-secrets-store-provider-azure/csi-secrets-store-provider-azure --generate-name
+
+kubectl create secret generic secrets-store-creds --from-literal clientid="1fe0d3fb-f22e-4519-bd98-aa1728405d03" --from-literal clientsecret="DIg5PJHhSl.~J-gbyOsw-iMH9tuJQ68oL5"
