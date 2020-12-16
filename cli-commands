@@ -22,5 +22,5 @@ helm install csi-secrets-store-provider-azure/csi-secrets-store-provider-azure -
 az ad group create --display-name web-dev-11 --mail-nickname web-dev-11
 az ad group create --display-name api-dev-11 --mail-nickname api-dev-11
 
-kubectl create secret generic secrets-store-creds --from-literal clientid="1fe0d3fb-f22e-4519-bd98-aa1728405d03" --from-literal clientsecret="DIg5PJHhSl.~J-gbyOsw-iMH9tuJQ68oL5"
+kubectl create secret generic secrets-store-creds --from-literal clientid="1fe0d3fb-f22e-4519-bd98-aa1728405d03" --from-literal clientsecret="DIg5PJHhSl.~J-gbyOsw-iMH9tuJQ68oL5" --namespace api-dev
 
