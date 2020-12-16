@@ -10,8 +10,17 @@ az aks create --resource-group oh-aks-rg --name oh-aks --enable-aad --aad-admin-
 # Get Creds
 az aks get-credentials --resource-group oh-aks-rg --name oh-aks
 
-## Challenge 4 ##
+# Challenge 4
 
-#  Create two AAD Groups
+# AKS integration
+az ad sp create-for-rbac --name ohServicePrincipal --skip-assignment
+
+helm repo add csi-secrets-store-provider-azure https://raw.githubusercontent.com/Azure/secrets-store-csi-driver-provider-azure/master/charts
+
+helm install csi-secrets-store-provider-azure/csi-secrets-store-provider-azure --generate-name
+
 az ad group create --display-name web-dev-11 --mail-nickname web-dev-11
 az ad group create --display-name api-dev-11 --mail-nickname api-dev-11
+
+kubectl create secret generic secrets-store-creds --from-literal clientid="1fe0d3fb-f22e-4519-bd98-aa1728405d03" --from-literal clientsecret="DIg5PJHhSl.~J-gbyOsw-iMH9tuJQ68oL5"
+
