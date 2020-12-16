@@ -20,4 +20,5 @@ spec:
         backend:
           serviceName: poi-service
           servicePort: 80
+          path: /api/poi
 
