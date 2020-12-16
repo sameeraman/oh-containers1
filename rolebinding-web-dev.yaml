@@ -1,0 +1,32 @@
+## Role Bindings for api-dev 
+
+# Full access for eb-dev-11 = f9bf31f6-7e03-4432-b58c-8e7d300f3f9f
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-dev-full-access-to-web-dev-11
+  namespace: web-dev
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: web-dev-full-access
+subjects:
+- kind: Group
+  namespace: web-dev
+  name: f9bf31f6-7e03-4432-b58c-8e7d300f3f9f
+
+---
+# Read access for api-dev-11 = ed7f2ac5-bcc8-45b0-b986-cde6044d1dfe
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: web-dev-read-access-to-api-dev-11
+  namespace: web-dev
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: web-dev-read-access
+subjects:
+- kind: Group
+  namespace: web-dev
+  name: ed7f2ac5-bcc8-45b0-b986-cde6044d1dfe
