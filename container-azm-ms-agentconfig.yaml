@@ -43,15 +43,37 @@ data:
           enabled = false
           # When this is enabled (enabled = true), all kube events including normal events will be collected
 
-    prometheus-data-collection-settings: |- 
+  prometheus-data-collection-settings: |-
     # Custom Prometheus metrics data collection settings
-    [prometheus_data_collection_settings.cluster] ​
-    interval = "1m"  ## Valid time units are s, m, h.
-     fieldpass = ["http_requests_received_total", "http_request_duration_seconds_bucket", "dotnet_collection_count_total", "http_requests_in_progress"] ## specify metrics to pass through ​
-     fielddrop = [""] ## specify metrics to drop from collecting
-    kubernetes_services = ["http://tripview-service.web-dev/metrics"]
+    [prometheus_data_collection_settings.cluster]
+        # Cluster level scrape endpoint(s). These metrics will be scraped from agent's Replicaset (singleton)
+        # Any errors related to prometheus scraping can be found in the KubeMonAgentEvents table in the Log Analytics workspace that the cluster is sending data to.
 
-    
+        #Interval specifying how often to scrape for metrics. This is duration of time and can be specified for supporting settings by combining an integer value and time unit as a string value. Valid time units are ns, us (or µs), ms, s, m, h.
+        interval = "1m"
+
+        ## Uncomment the following settings with valid string arrays for prometheus scraping
+        fieldpass = ["http_requests_received_total", "http_request_duration_seconds_bucket", "dotnet_collection_count_total", "http_requests_in_progress"] ## specify metrics to pass through ​
+        fielddrop = ["metric_to_drop"] ## specify metrics to drop from collecting
+
+        # An array of urls to scrape metrics from.
+        urls = ["http://tripview-service.web-dev/metrics"]
+
+        # An array of Kubernetes services to scrape metrics from.
+        # kubernetes_services = ["http://my-service-dns.my-namespace:9102/metrics"]
+
+        # When monitor_kubernetes_pods = true, replicaset will scrape Kubernetes pods for the following prometheus annotations:
+        # - prometheus.io/scrape: Enable scraping for this pod
+        # - prometheus.io/scheme: If the metrics endpoint is secured then you will need to
+        #     set this to `https` & most likely set the tls config.
+        # - prometheus.io/path: If the metrics path is not /metrics, define it with this annotation.
+        # - prometheus.io/port: If port is not 9102 use this annotation
+        monitor_kubernetes_pods = false
+
+        ## Restricts Kubernetes monitoring to namespaces for pods that have annotations set and are scraped using the monitor_kubernetes_pods setting.
+        ## This will take effect when monitor_kubernetes_pods is set to true
+        ##   ex: monitor_kubernetes_pods_namespaces = ["default1", "default2", "default3"]
+        # monitor_kubernetes_pods_namespaces = ["default1"]
 
     [prometheus_data_collection_settings.node]
         # Node level scrape endpoint(s). These metrics will be scraped from agent's DaemonSet running in every node in the cluster
